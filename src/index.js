@@ -1,3 +1,4 @@
 import './styles/style.css';
+import getWeatherData from './modules/api-handling';
 
-console.log('Frontend Boilerplate Ready!');
+getWeatherData();
