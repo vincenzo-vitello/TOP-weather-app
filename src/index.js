@@ -1,4 +1,4 @@
 import './styles/style.css';
-import getWeatherData from './modules/api-handling';
+import formListener from './modules/dom';
 
-getWeatherData();
+formListener();

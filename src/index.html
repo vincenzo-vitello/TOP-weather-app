@@ -6,6 +6,21 @@
     <title>Meteora</title>
   </head>
   <body>
-    <h1>Meteora, the weather app made with love.</h1>
+    <form action="/" id="location-form">
+      <label for="location-input">Insert location:</label>
+      <input type="text" name="location-input" id="location-input">
+      <button type="submit">Search</button>
+    </form>
+    <div id="weather-infos">
+      <div id="date">Date: </div>
+      <div id="timezone">Timezone: </div>
+      <div id="location">Location: </div>
+      <div id="conditions">Conditions: </div>
+      <div id="temperature">Temperature: </div>
+      <div id="feelslike">Feels like: </div>
+      <div id="humidity">Humidity: </div>
+      <div id="cloud-cover">Cloud cover: </div>
+      <div id="precipit">Precipitations: </div>
+    </div>
   </body>
 </html>
