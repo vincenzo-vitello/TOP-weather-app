@@ -1,13 +1,15 @@
 import getWeatherData from './api-handling';
 import getLocation from './location';
 import getCurrentDate from './date';
-import { updateWeatherInfo, createForecastElements } from './domElements';
+import { updateWeatherInfo, createForecastElements, clearWeatherInfo } from './domElements';
 
 const form = document.getElementById('location-form');
 const input = document.querySelector('input');
 
 async function renderBody(location) {
   try {
+    clearWeatherInfo();
+
     const data = await getWeatherData(location);
 
     if (!data || !data.location || !data.current) {
@@ -19,7 +21,7 @@ async function renderBody(location) {
     updateWeatherInfo(data);
     createForecastElements(data.forecast.forecastday, getCurrentDate());
   } catch (error) {
-    console.error('Error while rendering data: ', error);
+    console.error('Error rendering data:', error);
   }
 }
 
@@ -34,4 +36,26 @@ function formListener() {
   });
 }
 
-export default formListener;
+async function getUserLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const { latitude, longitude } = position.coords;
+      const location = `${latitude},${longitude}`;
+      await renderBody(location);
+    }, (error) => {
+      console.error('Error getting user location:', error);
+      const defaultLocation = 'New York';
+      renderBody(defaultLocation);
+    });
+  } else {
+    console.error('Geolocation is not supported by this browser.');
+
+    const defaultLocation = 'New York';
+    renderBody(defaultLocation);
+  }
+}
+
+export default function init() {
+  formListener();
+  getUserLocation();
+}

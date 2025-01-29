@@ -1,4 +1,5 @@
-import './styles/style.css';
-import formListener from './modules/dom';
+import init from './modules/dom';
 
-formListener();
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+});
