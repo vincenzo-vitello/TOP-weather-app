@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-useless-concat
-const API_KEY = 'key=V62MCK5GQYBYDFTZWGWP5C9VX';
+const API_KEY = 'key=558a618dfd01412f842102609252901';
 
 async function getWeatherData(location) {
-  const API_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${`${location}?${API_KEY}`}
+  const API_URL = `http://api.weatherapi.com/v1/forecast.json?${`${API_KEY}&q=${location}&days=7&aqi=no&alerts=no`}
 `;
   try {
     const res = await fetch(API_URL, { mode: 'cors' });

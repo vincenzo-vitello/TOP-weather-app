@@ -1,49 +1,25 @@
 import getWeatherData from './api-handling';
 import getLocation from './location';
+import getCurrentDate from './date';
+import { updateWeatherInfo, createForecastElements } from './domElements';
 
 const form = document.getElementById('location-form');
 const input = document.querySelector('input');
-
-const elements = {
-  date: document.querySelector('#date'),
-  timezone: document.querySelector('#timezone'),
-  location: document.querySelector('#location'),
-  conditions: document.querySelector('#conditions'),
-  temperature: document.querySelector('#temperature'),
-  feelsLike: document.querySelector('#feelslike'),
-  humidity: document.querySelector('#humidity'),
-  cloudCover: document.querySelector('#cloud-cover'),
-  precipitation: document.querySelector('#precipit'),
-};
 
 async function renderBody(location) {
   try {
     const data = await getWeatherData(location);
 
-    if (!data || !data.days || data.days.length === 0) {
-      console.error('Dati mancanti o non validi');
+    if (!data || !data.location || !data.current) {
+      console.error('Missing or invalid data');
       return;
     }
-
-    const today = data.days[0];
-    elements.date.innerText += today.datetime;
-    elements.timezone.innerText += data.timezone;
-    elements.location.innerText += data.address.trim();
-    elements.conditions.innerText += data.description;
-
-    // Conversione Fahrenheit -> Celsius
-    const tempMaxCelsius = ((today.tempmax - 32) * 5) / 9;
-    const tempMinCelsius = ((today.tempmin - 32) * 5) / 9;
-
-    elements.temperature.innerText += `${tempMaxCelsius.toFixed(1)}°C`; // Temp. massima convertita
-    elements.feelsLike.innerText += `${tempMinCelsius.toFixed(1)}°C`; // Temp. minima convertita
-    elements.humidity.innerText += `${today.humidity || 'N/A'}%`;
-    elements.cloudCover.innerText += `${today.cloudcover || 'N/A'}%`;
-    elements.precipitation.innerText += `${today.precip || 0} mm`;
-
-    console.log(data);
+    console.log('data: ', data);
+    console.log('forecast: ', data.forecast);
+    updateWeatherInfo(data);
+    createForecastElements(data.forecast.forecastday, getCurrentDate());
   } catch (error) {
-    console.error('Errore durante il rendering dei dati:', error);
+    console.error('Error while rendering data: ', error);
   }
 }
 
@@ -55,7 +31,6 @@ function formListener() {
 
     form.reset();
     await renderBody(location);
-    console.log(locationInput);
   });
 }
 
