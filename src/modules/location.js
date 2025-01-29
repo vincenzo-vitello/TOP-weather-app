@@ -1,6 +1,6 @@
 function getLocation(locationInput) {
-  const location = locationInput;
-  return location;
+  const loc = locationInput;
+  return loc;
 }
 
 export default getLocation;
