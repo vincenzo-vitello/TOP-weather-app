@@ -5,6 +5,8 @@ export const elements = {
   conditions: document.querySelector('#conditions'),
   hourlyConditions: document.querySelector('#hourly-conditions'),
   temperature: document.querySelector('#temperature'),
+  maxTemp: document.querySelector('#max-temp'),
+  minTemp: document.querySelector('#min-temp'),
   feelsLike: document.querySelector('#feelslike'),
   humidity: document.querySelector('#humidity'),
   cloudCover: document.querySelector('#cloud-cover'),
@@ -12,15 +14,16 @@ export const elements = {
 };
 
 export function updateWeatherInfo(data) {
-  elements.date.innerText = `Date: ${data.location.localtime}`;
-  elements.timezone.innerText = `Timezone: ${data.location.tz_id}`;
-  elements.location.innerText = `Location: ${data.location.name}, ${data.location.region}, ${data.location.country}`;
-  elements.conditions.innerText = `Conditions:  ${data.current.condition.text}`;
-  elements.temperature.innerText = `Temperature: ${data.current.temp_c}C°`;
-  elements.feelsLike.innerText = `Feels like: ${data.current.feelslike_c}°C`;
-  elements.humidity.innerText = `Humidity: ${data.current.humidity}%`;
-  elements.cloudCover.innerText = `Cloud cover: ${data.current.cloud}%`;
-  elements.precipitation.innerText = `Precipitations: ${data.current.precip_mm} mm`;
+  elements.date.innerText = `${data.location.localtime}`;
+  elements.location.innerText = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+  elements.conditions.innerText = `${data.current.condition.text}`;
+  elements.temperature.innerText = `${data.current.temp_c}C°`;
+  elements.maxTemp.innerText = `MAX: ${data.forecast.forecastday[0].day.maxtemp_c}C°`;
+  elements.minTemp.innerText = `MIN: ${data.forecast.forecastday[0].day.mintemp_c}C°`;
+  elements.feelsLike.innerText = `${data.current.feelslike_c}°C`;
+  elements.humidity.innerText = `${data.current.humidity}%`;
+  elements.cloudCover.innerText = `${data.current.cloud}%`;
+  elements.precipitation.innerText = `${data.current.precip_mm} mm`;
 }
 
 export function createForecastElements(forecast, currentDate) {

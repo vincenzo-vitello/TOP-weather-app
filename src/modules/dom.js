@@ -38,18 +38,21 @@ function formListener() {
 function inputListener() {
   const suggestionsList = document.createElement('ul');
   suggestionsList.className = 'autocomplete-list';
-  document.body.appendChild(suggestionsList);
+  suggestionsList.style.display = 'none';
+  form.appendChild(suggestionsList);
   input.addEventListener('input', async () => {
     const query = input.value;
     suggestionsList.innerHTML = '';
     if (query.length <= 2) return;
     const suggestions = await getAutoCompleteItems(query);
+    suggestionsList.style.display = 'flex';
     suggestions.forEach((suggestion) => {
       const suggestionItem = document.createElement('li');
       suggestionItem.className = 'suggestion-item';
       suggestionItem.innerText = `${suggestion.name}, ${suggestion.region}, ${suggestion.country}`;
       suggestionItem.addEventListener('click', () => {
         input.value = suggestionItem.textContent;
+        suggestionsList.style.display = 'none';
         suggestionsList.innerHTML = '';
       });
       suggestionsList.appendChild(suggestionItem);

@@ -5,24 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meteora</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </head>
   <body>
-    <form action="/" id="location-form">
-      <label for="location-input">Insert location:</label>
-      <input type="text" name="location-input" id="location-input">
-      <button type="submit">Search</button>
-    </form>
-    <div id="weather-infos">
-      <div id="date"> </div>
-      <div id="timezone"></div>
-      <div id="location"></div>
-      <div id="conditions"></div>
-      <div id="hourly-conditions"></div>
-      <div id="temperature"></div>
-      <div id="feelslike"></div>
-      <div id="humidity"></div>
-      <div id="cloud-cover"></div>
-      <div id="precipit"></div>
-    </div>
+    <main id="app">
+      <div id="form-container">
+        <form action="/" id="location-form">
+          <input type="text" name="location-input" id="location-input">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div id="weather-infos">
+        <div id="date"></div>
+        <div id="timezone"></div>
+        <div id="location"></div>
+        <div id="temperature"></div>
+        <div id="conditions"></div>
+        <div id="hourly-conditions"></div>
+        <div id="max-temp"></div>
+        <div id="min-temp"></div>
+        <div id="feelslike"></div>
+        <div id="humidity"></div>
+        <div id="cloud-cover"></div>
+        <div id="precipit"></div>
+      </div>
+    </main>
   </body>
 </html>

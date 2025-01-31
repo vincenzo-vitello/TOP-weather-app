@@ -6,4 +6,90 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
+body {
+  background-image: url('../assets/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 2rem;
+}
+#form-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+form {
+  position: relative;
+  width: fit-content;
+}
+form input {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  height: 40px;
+  width: 250px;
+}
+form input:hover {
+  outline: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+form input:focus {
+  outline: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.4);
+}
 
+form button {
+  padding: 10px 15px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+}
+form button:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+form .autocomplete-list {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 250px;
+  list-style-type: none;
+  flex-direction: column;
+  row-gap: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  border: 2px solid white;
+  color: white;
+}
+form .autocomplete-list li {
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+form .autocomplete-list li:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .4);
+}
+#weather-infos {
+  color: white;
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#weather-infos #date {
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+}
