@@ -3,6 +3,7 @@ export const elements = {
   timezone: document.querySelector('#timezone'),
   location: document.querySelector('#location'),
   conditions: document.querySelector('#conditions'),
+  hourlyConditions: document.querySelector('#hourly-conditions'),
   temperature: document.querySelector('#temperature'),
   feelsLike: document.querySelector('#feelslike'),
   humidity: document.querySelector('#humidity'),
@@ -33,17 +34,48 @@ export function createForecastElements(forecast, currentDate) {
 
       const fcDayDate = document.createElement('p');
       const fcDayTemp = document.createElement('p');
+      const fcDayConditions = document.createElement('p');
       const fcDayIcon = document.createElement('img');
 
       fcDayDate.innerText = fcDay.date;
       fcDayTemp.innerText = `${fcDay.day.maxtemp_c} C°`;
+      fcDayConditions.innerText = fcDay.day.condition.text;
       fcDayIcon.src = fcDay.day.condition.icon;
 
       fcDayData.appendChild(fcDayDate);
       fcDayData.appendChild(fcDayTemp);
+      fcDayData.appendChild(fcDayConditions);
       fcDayData.appendChild(fcDayIcon);
 
       forecastDayContainer.appendChild(fcDayData);
+    }
+
+    if (fcDay.date === currentDate && fcDay.hour) {
+      const now = new Date();
+      const currentHour = now.getHours();
+
+      fcDay.hour.forEach((hour) => {
+        const hourTime = new Date(hour.time).getHours();
+        if (hourTime >= currentHour) {
+          const hourlyCondition = document.createElement('div');
+          hourlyCondition.className = 'hourly-condition';
+
+          const hourElement = document.createElement('p');
+          hourElement.innerText = hourTime === currentHour ? 'now' : `${hourTime}:00`;
+
+          const tempElement = document.createElement('p');
+          tempElement.innerText = `${hour.temp_c} C°`;
+
+          const conditionIcon = document.createElement('img');
+          conditionIcon.src = hour.condition.icon;
+
+          hourlyCondition.appendChild(hourElement);
+          hourlyCondition.appendChild(tempElement);
+          hourlyCondition.appendChild(conditionIcon);
+
+          elements.hourlyConditions.appendChild(hourlyCondition);
+        }
+      });
     }
   });
 }
@@ -62,5 +94,9 @@ export function clearWeatherInfo() {
   const forecastContainer = document.querySelector('.forecast-container');
   if (forecastContainer) {
     forecastContainer.remove();
+  }
+
+  while (elements.hourlyConditions.firstChild) {
+    elements.hourlyConditions.removeChild(elements.hourlyConditions.firstChild);
   }
 }
