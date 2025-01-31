@@ -1,4 +1,4 @@
-const API_KEY = 'key=558a618dfd01412f842102609252901';
+const API_KEY = '&key=558a618dfd01412f842102609252901';
 
 async function getWeatherData(location) {
   let API_URL;
@@ -20,5 +20,18 @@ async function getWeatherData(location) {
     return null;
   }
 }
+async function getAutoCompleteItems(query) {
+  if (!query) return [];
 
-export default getWeatherData;
+  try {
+    const response = await fetch(`https://api.weatherapi.com/v1/search.json?${API_KEY}&q=${query}`, { mode: 'cors' });
+    if (!response.ok) throw new Error('Error fetching suggestions data');
+    const res = await response.json();
+    // console.log(res);
+    return res;
+  } catch (err) {
+    console.log('Error with autocompletion: ', err);
+    return [];
+  }
+}
+export { getWeatherData, getAutoCompleteItems };

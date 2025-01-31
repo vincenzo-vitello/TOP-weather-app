@@ -1,4 +1,4 @@
-import getWeatherData from './api-handling';
+import { getWeatherData, getAutoCompleteItems } from './api-handling';
 import getLocation from './location';
 import getCurrentDate from './date';
 import { updateWeatherInfo, createForecastElements, clearWeatherInfo } from './domElements';
@@ -35,7 +35,27 @@ function formListener() {
     await renderBody(location);
   });
 }
-
+function inputListener() {
+  const suggestionsList = document.createElement('ul');
+  suggestionsList.className = 'autocomplete-list';
+  document.body.appendChild(suggestionsList);
+  input.addEventListener('input', async () => {
+    const query = input.value;
+    suggestionsList.innerHTML = '';
+    if (query.length <= 2) return;
+    const suggestions = await getAutoCompleteItems(query);
+    suggestions.forEach((suggestion) => {
+      const suggestionItem = document.createElement('li');
+      suggestionItem.className = 'suggestion-item';
+      suggestionItem.innerText = `${suggestion.name}, ${suggestion.region}, ${suggestion.country}`;
+      suggestionItem.addEventListener('click', () => {
+        input.value = suggestionItem.textContent;
+        suggestionsList.innerHTML = '';
+      });
+      suggestionsList.appendChild(suggestionItem);
+    });
+  });
+}
 async function getUserLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -57,5 +77,6 @@ async function getUserLocation() {
 
 export default function init() {
   formListener();
+  inputListener();
   getUserLocation();
 }
