@@ -17,17 +17,36 @@
       </div>
       <div id="weather-infos">
         <div id="date"></div>
-        <div id="timezone"></div>
-        <div id="location"></div>
-        <div id="temperature"></div>
-        <div id="conditions"></div>
+        <div class="today-summary">
+          <div id="location"></div>
+          <div id="temperature"></div>
+          <div id="conditions"></div>
+          <div class="minmax-container">
+            <div id="max-temp"></div>
+            <div id="min-temp"></div>
+          </div>
+        </div>
         <div id="hourly-conditions"></div>
-        <div id="max-temp"></div>
-        <div id="min-temp"></div>
-        <div id="feelslike"></div>
-        <div id="humidity"></div>
-        <div id="cloud-cover"></div>
-        <div id="precipit"></div>
+        <div class="additional-infos">
+          <div class="wrapper">
+            <div class="feelslike-container">
+              <span>Feelslike</span>
+              <div id="feelslike"></div>
+            </div>
+            <div class="humidity-container">
+              <span>Humidity</span>
+              <div id="humidity"></div>
+            </div>
+            <div class="cloud-cover-container">
+              <span>Cloud cover</span>
+              <div id="cloud-cover"></div>
+            </div>
+            <div class="precipit-container">
+              <span>Precipitations</span>
+              <div id="precipit"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>

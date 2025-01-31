@@ -54,6 +54,8 @@ function inputListener() {
         input.value = suggestionItem.textContent;
         suggestionsList.style.display = 'none';
         suggestionsList.innerHTML = '';
+        renderBody(input.value);
+        form.reset();
       });
       suggestionsList.appendChild(suggestionItem);
     });

@@ -86,10 +86,95 @@ form .autocomplete-list li:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 #weather-infos #date {
   width: fit-content;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 10px;
+  font-size: .8rem;
+}
+#weather-infos #location {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.today-summary {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+.today-summary #temperature {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.minmax-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#conditions {
+  font-weight: 600;
+  opacity: .8;
+}
+#hourly-conditions {
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  gap: 20px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+.hourly-condition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .4);
+  padding: 10px;
+  border-radius: 5px;
+}
+.hourly-condition img {
+  width: 30px;
+}
+.additional-infos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.additional-infos .forecast-container {
+  display: flex;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+}
+.additional-infos .forecast-container img {
+  width: 30px;
+}
+.additional-infos .wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.feelslike-container, .humidity-container, .cloud-cover-container, .precipit-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+}
+#feelslike, #humidity, #cloud-cover, #precipit {
+  font-size: 1.2rem;
+  padding-top: 10px;
+}
+.additional-infos span {
+  font-size: .6rem;
+  border-bottom: 1px solid white;
+}
+.hidden {
+  display: none;
 }

@@ -1,6 +1,5 @@
-export const elements = {
+const elements = {
   date: document.querySelector('#date'),
-  timezone: document.querySelector('#timezone'),
   location: document.querySelector('#location'),
   conditions: document.querySelector('#conditions'),
   hourlyConditions: document.querySelector('#hourly-conditions'),
@@ -18,9 +17,9 @@ export function updateWeatherInfo(data) {
   elements.location.innerText = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
   elements.conditions.innerText = `${data.current.condition.text}`;
   elements.temperature.innerText = `${data.current.temp_c}C°`;
-  elements.maxTemp.innerText = `MAX: ${data.forecast.forecastday[0].day.maxtemp_c}C°`;
-  elements.minTemp.innerText = `MIN: ${data.forecast.forecastday[0].day.mintemp_c}C°`;
-  elements.feelsLike.innerText = `${data.current.feelslike_c}°C`;
+  elements.maxTemp.innerText = `MAX: ${data.forecast.forecastday[0].day.maxtemp_c} C°`;
+  elements.minTemp.innerText = `MIN: ${data.forecast.forecastday[0].day.mintemp_c} C°`;
+  elements.feelsLike.innerText = `${data.current.feelslike_c} C°`;
   elements.humidity.innerText = `${data.current.humidity}%`;
   elements.cloudCover.innerText = `${data.current.cloud}%`;
   elements.precipitation.innerText = `${data.current.precip_mm} mm`;
@@ -29,7 +28,7 @@ export function updateWeatherInfo(data) {
 export function createForecastElements(forecast, currentDate) {
   const forecastDayContainer = document.createElement('div');
   forecastDayContainer.classList.add('forecast-container');
-  document.body.appendChild(forecastDayContainer);
+  document.querySelector('.additional-infos').appendChild(forecastDayContainer);
   forecast.forEach((fcDay) => {
     if (fcDay.date !== currentDate) {
       const fcDayData = document.createElement('div');
@@ -73,8 +72,8 @@ export function createForecastElements(forecast, currentDate) {
           conditionIcon.src = hour.condition.icon;
 
           hourlyCondition.appendChild(hourElement);
-          hourlyCondition.appendChild(tempElement);
           hourlyCondition.appendChild(conditionIcon);
+          hourlyCondition.appendChild(tempElement);
 
           elements.hourlyConditions.appendChild(hourlyCondition);
         }
@@ -85,7 +84,6 @@ export function createForecastElements(forecast, currentDate) {
 
 export function clearWeatherInfo() {
   elements.date.innerText = '';
-  elements.timezone.innerText = '';
   elements.location.innerText = '';
   elements.conditions.innerText = '';
   elements.temperature.innerText = '';
