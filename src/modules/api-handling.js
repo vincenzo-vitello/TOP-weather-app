@@ -1,16 +1,19 @@
-const API_KEY = '&key=558a618dfd01412f842102609252901';
+const API_KEY = 'key=558a618dfd01412f842102609252901';
 
-async function getWeatherData(location) {
+export async function getWeatherData(location) {
   let API_URL;
   if (location.includes(',')) {
     const [latitude, longitude] = location.split(',');
-    API_URL = `http://api.weatherapi.com/v1/forecast.json?${API_KEY}&q=${latitude},${longitude}&days=7&aqi=no&alerts=no`;
+    API_URL = `https://api.weatherapi.com/v1/forecast.json?${API_KEY}&q=${latitude},${longitude}&days=7&aqi=no&alerts=no`;
   } else {
-    API_URL = `http://api.weatherapi.com/v1/forecast.json?${API_KEY}&q=${location}&days=7&aqi=no&alerts=no`;
+    API_URL = `https://api.weatherapi.com/v1/forecast.json?${API_KEY}&q=${location}&days=7&aqi=no&alerts=no`;
   }
 
   try {
     const res = await fetch(API_URL, { mode: 'cors' });
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
     const data = await res.json();
     return data;
   } catch (err) {
@@ -20,18 +23,18 @@ async function getWeatherData(location) {
     return null;
   }
 }
-async function getAutoCompleteItems(query) {
+
+export async function getAutoCompleteItems(query) {
   if (!query) return [];
 
   try {
     const response = await fetch(`https://api.weatherapi.com/v1/search.json?${API_KEY}&q=${query}`, { mode: 'cors' });
     if (!response.ok) throw new Error('Error fetching suggestions data');
     const res = await response.json();
-    // console.log(res);
+    console.log(res);
     return res;
   } catch (err) {
     console.log('Error with autocompletion: ', err);
     return [];
   }
 }
-export { getWeatherData, getAutoCompleteItems };
